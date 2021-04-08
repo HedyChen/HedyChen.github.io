@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>BFC</title>
-    <url>/2021/04/08/BFC/</url>
+    <url>blog/2021/04/08/BFC/</url>
     <content><![CDATA[<p>在实际经验中，经常会遇到这样一些情况，给某个元素设置了margin-top，margin-bottom实际运行却看不到效果，往往是因为发生了边距重叠。</p>
 <h3 id="什么是外边距重叠？"><a href="#什么是外边距重叠？" class="headerlink" title="什么是外边距重叠？"></a>什么是外边距重叠？</h3><p>边距重叠（也叫边距合并）是指：两个或多个盒子（可能相邻或嵌套）的垂直方向的相邻外边界重合在一起，形成一个外边界的情况。</p>
 <span id="more"></span>
@@ -46,7 +46,7 @@
   </entry>
   <entry>
     <title>CSS盒模型</title>
-    <url>/2021/04/08/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</url>
+    <url>blog/2021/04/08/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</url>
     <content><![CDATA[<p>css盒模型是html+css中最核心的基础知识，那么什么是盒模型？<br>css盒子模型又称框模型 (Box Model) ，包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。如图：  </p>
 <p><img src="https://i.imgur.com/7Ze755N.png">  </p>
 <h3 id="标准盒模型和IE盒模型"><a href="#标准盒模型和IE盒模型" class="headerlink" title="标准盒模型和IE盒模型"></a>标准盒模型和IE盒模型</h3><p>盒模型有标准盒模型和IE盒模型两种模式，两者的区别在于对元素的width和height的计算方式不同：  </p>
