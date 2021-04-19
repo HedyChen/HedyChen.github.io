@@ -1,33 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>BFC</title>
-      <link href="/blog/2021/04/08/BFC/"/>
-      <url>/blog/2021/04/08/BFC/</url>
-      
-        <content type="html"><![CDATA[<p>在实际经验中，经常会遇到这样一些情况，给某个元素设置了margin-top，margin-bottom实际运行却看不到效果，往往是因为发生了边距重叠。</p><h3 id="什么是外边距重叠？"><a href="#什么是外边距重叠？" class="headerlink" title="什么是外边距重叠？"></a>什么是外边距重叠？</h3><p>边距重叠（也叫边距合并）是指：两个或多个盒子（可能相邻或嵌套）的垂直方向的相邻外边界重合在一起，形成一个外边界的情况。</p><span id="more"></span><h5 id="看个栗子"><a href="#看个栗子" class="headerlink" title="看个栗子"></a>看个栗子</h5><pre><code>&lt;style type="text/css"&gt;    *{        padding: 0;        margin: 0;    }    #box{        background: #FBD46D;    }    #child{        height: 300px;        margin-top: 20px;        background: #5DF856;    }&lt;/style&gt;&lt;div id="box"&gt;    &lt;div id="child"&gt;&lt;/div&gt;&lt;/div&gt;</code></pre><p>在这里，为#child这个div设置<code>margin-top: 20px</code>,如果不考虑边距重叠，#box这个div高度应该被撑到320px，从页面距离顶部0px的位置显示，并且上面的20px应该显示成#FBD46D，而在浏览器中真实的显示效果却不是这样，下面为真实显示效果。</p><p><img src="https://i.imgur.com/fa2dPmn.png"></p><p>可以看到#box这个div并没有像我们预期的那样，高度被撑到310px，而是里层#child子div高度，这是因为#boxf父元素与#child子元素发生了边距重叠。父子元素和兄弟元素都可能发生边距重叠，可以参考w3school的说明：<a href="http://www.w3school.com.cn/css/css_margin_collapsing.asp">http://www.w3school.com.cn/css/css_margin_collapsing.asp</a></p><h3 id="怎么解决边距重叠？"><a href="#怎么解决边距重叠？" class="headerlink" title="怎么解决边距重叠？"></a>怎么解决边距重叠？</h3><p>解决边距重叠常用的方式是：使用BFC！    </p><h5 id="什么是BFC"><a href="#什么是BFC" class="headerlink" title="什么是BFC"></a>什么是BFC</h5><p>BFC（Block Formatting Contexts）译为块级格式化上下文，规定了将文档显示在视觉媒体上的机制。  </p><h5 id="BFC的原理是什么"><a href="#BFC的原理是什么" class="headerlink" title="BFC的原理是什么"></a>BFC的原理是什么</h5><ul><li>BFC元素内的各个子元素垂直方向边距会发生重叠</li><li>BFC元素不会与浮动元素的box发生重叠 </li><li>计算BFC高度的时候浮动元素也会参与计算</li><li>BFC是页面上的一个独立的容器，容器的子元素不会在布局上影响到容器外面的元素，容器外面的元素也不会在布局上影响到容器里面的元素 </li></ul><h5 id="如何创建BFC"><a href="#如何创建BFC" class="headerlink" title="如何创建BFC"></a>如何创建BFC</h5><ul><li>flot值不为null  </li><li>position的值不为static和relative  </li><li>display的值为inline-block,table,table-cell,able-caption,flex  </li><li>overflow的值不为visible<br>例如：上面的栗子中为#box这个div设置<code>overflow:hidden</code>创建一个BFC，结果如下图所示  </li></ul><p><img src="https://i.imgur.com/hVwsM7z.png"></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CSS盒模型</title>
-      <link href="/blog/2021/04/08/css%E7%9B%92%E6%A8%A1%E5%9E%8B/"/>
-      <url>/blog/2021/04/08/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</url>
-      
-        <content type="html"><![CDATA[<p>css盒模型是html+css中最核心的基础知识，那么什么是盒模型？<br>css盒子模型又称框模型 (Box Model) ，包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。如图：  </p><p><img src="https://i.imgur.com/7Ze755N.png">  </p><h3 id="标准盒模型和IE盒模型"><a href="#标准盒模型和IE盒模型" class="headerlink" title="标准盒模型和IE盒模型"></a>标准盒模型和IE盒模型</h3><p>盒模型有标准盒模型和IE盒模型两种模式，两者的区别在于对元素的width和height的计算方式不同：  </p><p>在标准盒模型中：盒子的大小就是element的width和height；而在IE盒模型中：盒子的宽=element的width+(padding-left)+(padding-right)+(border-left)+(border-right);盒子的高=element的height+(padding-top)+(padding-bottom)+(border-top)+(border-bottom)  </p><p><img src="https://i.imgur.com/8XS3CYM.png">  </p><p>设置<code>box-sizing</code>属性为<code> content-box</code>可以将一个盒模型设置成标准盒模型，设置<code>box-sizing</code>属性为<code>border-box</code>可以将一个盒模型设置成IE盒模型；浏览器中默认使用的事标准盒模型。</p><h3 id="如何通过JS获得盒模型的宽度和高度"><a href="#如何通过JS获得盒模型的宽度和高度" class="headerlink" title="如何通过JS获得盒模型的宽度和高度"></a>如何通过JS获得盒模型的宽度和高度</h3><h4 id="dom-style-width-height"><a href="#dom-style-width-height" class="headerlink" title="dom.style.width/height"></a>dom.style.width/height</h4><p>可以通过style属性获取盒子宽度高度，上面写的dom代表页面上的元素（如：通过document.getElementById获取到的元素，下面的dom代表同样的意思），利用元素的style属性是可读可写的，也就是说可以通过style属性获取到某个元素的宽高，通过设置style属性宽高的值也可以设置元素的宽高。我们都知道在给元素写样式的时候有几种方式，可以直接写在标签上面，在标签内设置<code>style</code>属性，通常称为内联样式；也可以在页面上使用<code>&lt;style&gt;</code>标签来为页面上的元素添加样式，这种也被人称为内嵌样式；还有一种就是写一个专门的css文件，用来放页面样式代码，这种常被称为外联样式。但是值得一提的是，通过style属性只能获取到内联样式上面设置的属性值，通过style属性获取到的值是没有经过浏览器渲染的值。  </p><p><img src="https://i.imgur.com/lqm9b5v.png">    </p><p>运行结果如下：<br><img src="https://i.imgur.com/Yv2xrTf.png"></p><h4 id="dom-currentStyle-width-height"><a href="#dom-currentStyle-width-height" class="headerlink" title="dom.currentStyle.width/height"></a>dom.currentStyle.width/height</h4><p>currentStyle属性完美解决了上面style的两个问题，它可以获取到通过任何方式设置的元素的样式，获取到的样式的值是经过浏览器渲染后的，最终显示的值；但是，它也存在一个问题，这个属性只在IE上能正确运行。</p><h4 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h4><p>window.getComputedStyle(“元素”,”伪类”)可以获取到指定元素的所有属性和样式，其返回值是一个对象。想要获取不同的属性值，可直接在window.getComputedStyle()的返回对象上取得相应值。这种方式获得的值也是浏览器渲染后的值，前面说过，这个方法的返回值是一个对象，其中包括元素的所有样式，如果某个样式没有在样式中显示设置，也可以获得浏览器为该元素设置的默认的值，也即是浏览器渲染后显示的样式。<br>这种方式的缺点是不支持IE8及以下版本的IE，在其他的浏览器基本上都支持采用这种方式获取页面渲染后的样式。 </p><p><img src="https://i.imgur.com/XNy5QdH.png"><br>运行结果如下<br><img src="https://i.imgur.com/whLuG00.png"></p><h3 id="dom-getBoundingClientRect-width-height"><a href="#dom-getBoundingClientRect-width-height" class="headerlink" title="dom.getBoundingClientRect().width/height"></a>dom.getBoundingClientRect().width/height</h3><p>getBoundingClientRect()方法可以获得元素相对于视口的左上角位置而言的距离，如下图所示：    </p><p><img src="https://i.imgur.com/wpGDwTT.png">  </p><p>其返回值为对象，包括top,right,bottom,left,width,height,x,y几个属性，可以分别获得这些属性的值，这些值都是经过浏览器渲染后的结果。其中top,right,bottom,left可以兼容所有浏览器，而width,height在IE8及以下版本不能正确获得。  </p><p><img src="https://i.imgur.com/FmAW8Rs.png"><br>运行结果如下：<br><img src="https://i.imgur.com/VAyXQVt.png"></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-  
-  
+<search>
+  <entry>
+    <title>BFC</title>
+    <url>/blog/2021/04/08/BFC/</url>
+    <content><![CDATA[<p>在实际经验中，经常会遇到这样一些情况，给某个元素设置了margin-top，margin-bottom实际运行却看不到效果，往往是因为发生了边距重叠。</p>
+<h3 id="什么是外边距重叠？"><a href="#什么是外边距重叠？" class="headerlink" title="什么是外边距重叠？"></a>什么是外边距重叠？</h3><p>边距重叠（也叫边距合并）是指：两个或多个盒子（可能相邻或嵌套）的垂直方向的相邻外边界重合在一起，形成一个外边界的情况。</p>
+<span id="more"></span>
+<h5 id="看个栗子"><a href="#看个栗子" class="headerlink" title="看个栗子"></a>看个栗子</h5><pre><code>&lt;style type="text/css"&gt;
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #box{
+        background: #FBD46D;
+    }
+    #child{
+        height: 300px;
+        margin-top: 20px;
+        background: #5DF856;
+    }
+&lt;/style&gt;
+&lt;div id="box"&gt;
+    &lt;div id="child"&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>在这里，为#child这个div设置<code>margin-top: 20px</code>,如果不考虑边距重叠，#box这个div高度应该被撑到320px，从页面距离顶部0px的位置显示，并且上面的20px应该显示成#FBD46D，而在浏览器中真实的显示效果却不是这样，下面为真实显示效果。</p>
+<p><img src="https://i.imgur.com/fa2dPmn.png"></p>
+<p>可以看到#box这个div并没有像我们预期的那样，高度被撑到310px，而是里层#child子div高度，这是因为#boxf父元素与#child子元素发生了边距重叠。父子元素和兄弟元素都可能发生边距重叠，可以参考w3school的说明：<a href="http://www.w3school.com.cn/css/css_margin_collapsing.asp">http://www.w3school.com.cn/css/css_margin_collapsing.asp</a></p>
+<h3 id="怎么解决边距重叠？"><a href="#怎么解决边距重叠？" class="headerlink" title="怎么解决边距重叠？"></a>怎么解决边距重叠？</h3><p>解决边距重叠常用的方式是：使用BFC！    </p>
+<h5 id="什么是BFC"><a href="#什么是BFC" class="headerlink" title="什么是BFC"></a>什么是BFC</h5><p>BFC（Block Formatting Contexts）译为块级格式化上下文，规定了将文档显示在视觉媒体上的机制。  </p>
+<h5 id="BFC的原理是什么"><a href="#BFC的原理是什么" class="headerlink" title="BFC的原理是什么"></a>BFC的原理是什么</h5><ul>
+<li>BFC元素内的各个子元素垂直方向边距会发生重叠</li>
+<li>BFC元素不会与浮动元素的box发生重叠 </li>
+<li>计算BFC高度的时候浮动元素也会参与计算</li>
+<li>BFC是页面上的一个独立的容器，容器的子元素不会在布局上影响到容器外面的元素，容器外面的元素也不会在布局上影响到容器里面的元素 </li>
+</ul>
+<h5 id="如何创建BFC"><a href="#如何创建BFC" class="headerlink" title="如何创建BFC"></a>如何创建BFC</h5><ul>
+<li>flot值不为null  </li>
+<li>position的值不为static和relative  </li>
+<li>display的值为inline-block,table,table-cell,able-caption,flex  </li>
+<li>overflow的值不为visible<br>例如：上面的栗子中为#box这个div设置<code>overflow:hidden</code>创建一个BFC，结果如下图所示  </li>
+</ul>
+<p><img src="https://i.imgur.com/hVwsM7z.png"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>CSS盒模型</title>
+    <url>/blog/2021/04/08/css%E7%9B%92%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>css盒模型是html+css中最核心的基础知识，那么什么是盒模型？<br>css盒子模型又称框模型 (Box Model) ，包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。如图：  </p>
+<p><img src="https://i.imgur.com/7Ze755N.png">  </p>
+<h3 id="标准盒模型和IE盒模型"><a href="#标准盒模型和IE盒模型" class="headerlink" title="标准盒模型和IE盒模型"></a>标准盒模型和IE盒模型</h3><p>盒模型有标准盒模型和IE盒模型两种模式，两者的区别在于对元素的width和height的计算方式不同：  </p>
+<p>在标准盒模型中：盒子的大小就是element的width和height；而在IE盒模型中：盒子的宽=element的width+(padding-left)+(padding-right)+(border-left)+(border-right);盒子的高=element的height+(padding-top)+(padding-bottom)+(border-top)+(border-bottom)  </p>
+<p><img src="https://i.imgur.com/8XS3CYM.png">  </p>
+<p>设置<code>box-sizing</code>属性为<code> content-box</code>可以将一个盒模型设置成标准盒模型，设置<code>box-sizing</code>属性为<code>border-box</code>可以将一个盒模型设置成IE盒模型；浏览器中默认使用的事标准盒模型。</p>
+<h3 id="如何通过JS获得盒模型的宽度和高度"><a href="#如何通过JS获得盒模型的宽度和高度" class="headerlink" title="如何通过JS获得盒模型的宽度和高度"></a>如何通过JS获得盒模型的宽度和高度</h3><h4 id="dom-style-width-height"><a href="#dom-style-width-height" class="headerlink" title="dom.style.width/height"></a>dom.style.width/height</h4><p>可以通过style属性获取盒子宽度高度，上面写的dom代表页面上的元素（如：通过document.getElementById获取到的元素，下面的dom代表同样的意思），利用元素的style属性是可读可写的，也就是说可以通过style属性获取到某个元素的宽高，通过设置style属性宽高的值也可以设置元素的宽高。我们都知道在给元素写样式的时候有几种方式，可以直接写在标签上面，在标签内设置<code>style</code>属性，通常称为内联样式；也可以在页面上使用<code>&lt;style&gt;</code>标签来为页面上的元素添加样式，这种也被人称为内嵌样式；还有一种就是写一个专门的css文件，用来放页面样式代码，这种常被称为外联样式。但是值得一提的是，通过style属性只能获取到内联样式上面设置的属性值，通过style属性获取到的值是没有经过浏览器渲染的值。  </p>
+<p><img src="https://i.imgur.com/lqm9b5v.png">    </p>
+<p>运行结果如下：<br><img src="https://i.imgur.com/Yv2xrTf.png"></p>
+<h4 id="dom-currentStyle-width-height"><a href="#dom-currentStyle-width-height" class="headerlink" title="dom.currentStyle.width/height"></a>dom.currentStyle.width/height</h4><p>currentStyle属性完美解决了上面style的两个问题，它可以获取到通过任何方式设置的元素的样式，获取到的样式的值是经过浏览器渲染后的，最终显示的值；但是，它也存在一个问题，这个属性只在IE上能正确运行。</p>
+<h4 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h4><p>window.getComputedStyle(“元素”,”伪类”)可以获取到指定元素的所有属性和样式，其返回值是一个对象。想要获取不同的属性值，可直接在window.getComputedStyle()的返回对象上取得相应值。这种方式获得的值也是浏览器渲染后的值，前面说过，这个方法的返回值是一个对象，其中包括元素的所有样式，如果某个样式没有在样式中显示设置，也可以获得浏览器为该元素设置的默认的值，也即是浏览器渲染后显示的样式。<br>这种方式的缺点是不支持IE8及以下版本的IE，在其他的浏览器基本上都支持采用这种方式获取页面渲染后的样式。 </p>
+<p><img src="https://i.imgur.com/XNy5QdH.png"><br>运行结果如下<br><img src="https://i.imgur.com/whLuG00.png"></p>
+<h3 id="dom-getBoundingClientRect-width-height"><a href="#dom-getBoundingClientRect-width-height" class="headerlink" title="dom.getBoundingClientRect().width/height"></a>dom.getBoundingClientRect().width/height</h3><p>getBoundingClientRect()方法可以获得元素相对于视口的左上角位置而言的距离，如下图所示：    </p>
+<p><img src="https://i.imgur.com/wpGDwTT.png">  </p>
+<p>其返回值为对象，包括top,right,bottom,left,width,height,x,y几个属性，可以分别获得这些属性的值，这些值都是经过浏览器渲染后的结果。其中top,right,bottom,left可以兼容所有浏览器，而width,height在IE8及以下版本不能正确获得。  </p>
+<p><img src="https://i.imgur.com/FmAW8Rs.png"><br>运行结果如下：<br><img src="https://i.imgur.com/VAyXQVt.png"></p>
+]]></content>
+  </entry>
 </search>
