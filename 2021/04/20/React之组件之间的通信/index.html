@@ -18,28 +18,32 @@
     var CONFIG = {"hostname":"hedychen.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hongxia Chen">
-<meta property="og:url" content="https://hedychen.github.io/index.html">
+  <meta name="description" content="在业务中使用React，不可避免地会遇到需要各种组件之间进行通信的情况，这些情况总结起来大概分为以下几种：  父组件向子组件通信 子组件向父组件通信 跨级组件通信 非嵌套组件之间通信  父组件向子组件通信这是最简单也是最常用的一种组件通信方式，父组件通过props将信息传递给子组件，子组件在接收到props后进行相应的操作。   父组件Parent.tsx 12345678910111213141">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React学习之组件之间的通信">
+<meta property="og:url" content="https://hedychen.github.io/2021/04/20/React%E4%B9%8B%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/index.html">
 <meta property="og:site_name" content="Hongxia Chen">
+<meta property="og:description" content="在业务中使用React，不可避免地会遇到需要各种组件之间进行通信的情况，这些情况总结起来大概分为以下几种：  父组件向子组件通信 子组件向父组件通信 跨级组件通信 非嵌套组件之间通信  父组件向子组件通信这是最简单也是最常用的一种组件通信方式，父组件通过props将信息传递给子组件，子组件在接收到props后进行相应的操作。   父组件Parent.tsx 12345678910111213141">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-20T03:32:48.964Z">
+<meta property="article:modified_time" content="2021-04-21T01:33:50.329Z">
 <meta property="article:author" content="Hongxia Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://hedychen.github.io/">
+<link rel="canonical" href="https://hedychen.github.io/2021/04/20/React%E4%B9%8B%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Hongxia Chen</title>
+  <title>React学习之组件之间的通信 | Hongxia Chen</title>
   
 
 
@@ -173,9 +177,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -191,10 +196,9 @@
       <meta itemprop="name" content="Hongxia Chen">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/20/React%E4%B9%8B%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/" class="post-title-link" itemprop="url">React学习之组件之间的通信</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          React学习之组件之间的通信
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -224,7 +228,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在业务中使用React，不可避免地会遇到需要各种组件之间进行通信的情况，这些情况总结起来大概分为以下几种：</p>
+        <p>在业务中使用React，不可避免地会遇到需要各种组件之间进行通信的情况，这些情况总结起来大概分为以下几种：</p>
 <ul>
 <li>父组件向子组件通信</li>
 <li>子组件向父组件通信</li>
@@ -269,162 +273,30 @@
 
 <h3 id="非嵌套组件之间通信"><a href="#非嵌套组件之间通信" class="headerlink" title="非嵌套组件之间通信"></a>非嵌套组件之间通信</h3><p>非嵌套组件，就是没有任何包含关系的组件，包括兄弟组件以及不在同一个父级中的非兄弟组件。对于非嵌套组件，可以利用二者共同父组件的 context 对象进行通信。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hedychen.github.io/2021/04/08/BFC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hongxia Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hongxia Chen">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/08/BFC/" class="post-title-link" itemprop="url">BFC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-04-08 15:23:26 / Modified: 15:25:42" itemprop="dateCreated datePublished" datetime="2021-04-08T15:23:26+08:00">2021-04-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在实际经验中，经常会遇到这样一些情况，给某个元素设置了margin-top，margin-bottom实际运行却看不到效果，往往是因为发生了边距重叠。</p>
-<h3 id="什么是外边距重叠？"><a href="#什么是外边距重叠？" class="headerlink" title="什么是外边距重叠？"></a>什么是外边距重叠？</h3><p>边距重叠（也叫边距合并）是指：两个或多个盒子（可能相邻或嵌套）的垂直方向的相邻外边界重合在一起，形成一个外边界的情况。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/08/BFC/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/08/BFC/" rel="prev" title="BFC">
+      <i class="fa fa-chevron-left"></i> BFC
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://hedychen.github.io/2021/04/08/css%E7%9B%92%E6%A8%A1%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hongxia Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hongxia Chen">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/08/css%E7%9B%92%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">CSS盒模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-04-08 15:11:43 / Modified: 15:27:30" itemprop="dateCreated datePublished" datetime="2021-04-08T15:11:43+08:00">2021-04-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>css盒模型是html+css中最核心的基础知识，那么什么是盒模型？<br>css盒子模型又称框模型 (Box Model) ，包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。如图：  </p>
-<p><img src="https://i.imgur.com/7Ze755N.png">  </p>
-<h3 id="标准盒模型和IE盒模型"><a href="#标准盒模型和IE盒模型" class="headerlink" title="标准盒模型和IE盒模型"></a>标准盒模型和IE盒模型</h3><p>盒模型有标准盒模型和IE盒模型两种模式，两者的区别在于对元素的width和height的计算方式不同：  </p>
-<p>在标准盒模型中：盒子的大小就是element的width和height；而在IE盒模型中：盒子的宽=element的width+(padding-left)+(padding-right)+(border-left)+(border-right);盒子的高=element的height+(padding-top)+(padding-bottom)+(border-top)+(border-bottom)  </p>
-<p><img src="https://i.imgur.com/8XS3CYM.png">  </p>
-<p>设置<code>box-sizing</code>属性为<code> content-box</code>可以将一个盒模型设置成标准盒模型，设置<code>box-sizing</code>属性为<code>border-box</code>可以将一个盒模型设置成IE盒模型；浏览器中默认使用的事标准盒模型。</p>
-<h3 id="如何通过JS获得盒模型的宽度和高度"><a href="#如何通过JS获得盒模型的宽度和高度" class="headerlink" title="如何通过JS获得盒模型的宽度和高度"></a>如何通过JS获得盒模型的宽度和高度</h3><h4 id="dom-style-width-height"><a href="#dom-style-width-height" class="headerlink" title="dom.style.width/height"></a>dom.style.width/height</h4><p>可以通过style属性获取盒子宽度高度，上面写的dom代表页面上的元素（如：通过document.getElementById获取到的元素，下面的dom代表同样的意思），利用元素的style属性是可读可写的，也就是说可以通过style属性获取到某个元素的宽高，通过设置style属性宽高的值也可以设置元素的宽高。我们都知道在给元素写样式的时候有几种方式，可以直接写在标签上面，在标签内设置<code>style</code>属性，通常称为内联样式；也可以在页面上使用<code>&lt;style&gt;</code>标签来为页面上的元素添加样式，这种也被人称为内嵌样式；还有一种就是写一个专门的css文件，用来放页面样式代码，这种常被称为外联样式。但是值得一提的是，通过style属性只能获取到内联样式上面设置的属性值，通过style属性获取到的值是没有经过浏览器渲染的值。  </p>
-<p><img src="https://i.imgur.com/lqm9b5v.png">    </p>
-<p>运行结果如下：<br><img src="https://i.imgur.com/Yv2xrTf.png"></p>
-<h4 id="dom-currentStyle-width-height"><a href="#dom-currentStyle-width-height" class="headerlink" title="dom.currentStyle.width/height"></a>dom.currentStyle.width/height</h4><p>currentStyle属性完美解决了上面style的两个问题，它可以获取到通过任何方式设置的元素的样式，获取到的样式的值是经过浏览器渲染后的，最终显示的值；但是，它也存在一个问题，这个属性只在IE上能正确运行。</p>
-<h4 id="window-getComputedStyle"><a href="#window-getComputedStyle" class="headerlink" title="window.getComputedStyle()"></a>window.getComputedStyle()</h4><p>window.getComputedStyle(“元素”,”伪类”)可以获取到指定元素的所有属性和样式，其返回值是一个对象。想要获取不同的属性值，可直接在window.getComputedStyle()的返回对象上取得相应值。这种方式获得的值也是浏览器渲染后的值，前面说过，这个方法的返回值是一个对象，其中包括元素的所有样式，如果某个样式没有在样式中显示设置，也可以获得浏览器为该元素设置的默认的值，也即是浏览器渲染后显示的样式。<br>这种方式的缺点是不支持IE8及以下版本的IE，在其他的浏览器基本上都支持采用这种方式获取页面渲染后的样式。 </p>
-<p><img src="https://i.imgur.com/XNy5QdH.png"><br>运行结果如下<br><img src="https://i.imgur.com/whLuG00.png"></p>
-<h3 id="dom-getBoundingClientRect-width-height"><a href="#dom-getBoundingClientRect-width-height" class="headerlink" title="dom.getBoundingClientRect().width/height"></a>dom.getBoundingClientRect().width/height</h3><p>getBoundingClientRect()方法可以获得元素相对于视口的左上角位置而言的距离，如下图所示：    </p>
-<p><img src="https://i.imgur.com/wpGDwTT.png">  </p>
-<p>其返回值为对象，包括top,right,bottom,left,width,height,x,y几个属性，可以分别获得这些属性的值，这些值都是经过浏览器渲染后的结果。其中top,right,bottom,left可以兼容所有浏览器，而width,height在IE8及以下版本不能正确获得。  </p>
-<p><img src="https://i.imgur.com/FmAW8Rs.png"><br>运行结果如下：<br><img src="https://i.imgur.com/VAyXQVt.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -477,6 +349,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="nav-number">1.</span> <span class="nav-text">父组件向子组件通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="nav-number">2.</span> <span class="nav-text">子组件向父组件通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E7%BA%A7%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="nav-number">3.</span> <span class="nav-text">跨级组件通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%B5%8C%E5%A5%97%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">4.</span> <span class="nav-text">非嵌套组件之间通信</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
